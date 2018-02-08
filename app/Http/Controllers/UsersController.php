@@ -11,9 +11,9 @@ class UsersController extends Controller
 {
 
 
-    public function status(Request $request, $email){
+    public function status(Request $request, $id){
 
-        $user = User::query()->where('email',$email)->whereNotNull('team_id')
+        $user = User::query()->where('id',$id)->whereNotNull('team_id')
             ->whereNull('termination_date')->firstOrFail();
 
         $status = new \stdClass();

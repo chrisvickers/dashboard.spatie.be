@@ -1,7 +1,11 @@
 .employee{
 }
 
+.tile.online{
+    background: var(--green-dark);
+}
+
 .tile.offline{
-    background: var(--blue);
+    background: var(--gray-light);
 
 }

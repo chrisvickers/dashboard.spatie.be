@@ -20,7 +20,7 @@ export default{
 
     mixins : [echo],
 
-    props : ['employee','position','email'],
+    props : ['employee','position','email','id'],
 
     data(){
         return {
@@ -33,9 +33,9 @@ export default{
 
     methods : {
 
-        getStatus : function(email){
+        getStatus : function(id){
 
-            axios.get('/users/' + email + '/status').then((response) => {
+            axios.get('/users/' + id + '/status').then((response) => {
                 this.user = response.data;
                 this.getStatusClass(this.user);
             },(response) => {
@@ -53,7 +53,8 @@ export default{
 
 
     mounted() {
-        this.getStatus(this.email);
+
+        setInterval(this.getStatus(this.id),3000);
     }
 
 
