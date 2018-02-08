@@ -22,13 +22,13 @@
     {{--<npm position="b2"></npm>--}}
     {{--<github position="b3"></github>--}}
     {{--<music position="c1:d1"></music>--}}
-    {{--<time-weather position="e1:f1" date-format="ddd DD/MM" time-zone="America/New_York" weather-city="Tampa Bay"></time-weather>--}}
     <?php $count = $count += 2;  $row_index = 0;?>
     @foreach($closers as $closer)
             <employee employee="{{ $closer->name }}" email="{{ $closer->email }}" position="{{ $rows[$row_index] . $count }}:{{ $rows[$row_index+1] . $count }}"></employee>
             <?php $row_index += 2;?>
     @endforeach
-    {{--<calendar position="f2:f3"></calendar>--}}
+    <time-weather position="g6:h7" date-format="ddd DD/MM" time-zone="America/New_York" weather-city="Tampa Bay"></time-weather>
+        {{--<calendar position="f2:f3"></calendar>--}}
     {{--<internet-connection></internet-connection>--}}
 </dashboard>
 

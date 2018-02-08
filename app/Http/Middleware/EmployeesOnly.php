@@ -29,7 +29,7 @@ class EmployeesOnly
         if(empty($user->team_id) || !empty($user->termination_date)){
             abort(404);
         }
-        
+
         return $next($request);
     }
 }
