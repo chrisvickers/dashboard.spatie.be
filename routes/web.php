@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['middleware' => 'auth.basic'], function () {
+Route::group(['middleware' => ['auth.basic','employees']], function () {
     Route::get('/', 'DashboardController@index');
 });
 

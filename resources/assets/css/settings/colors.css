@@ -42,6 +42,6 @@
     --gray-darker: #23272f;
     --gray-darkest: #1a1e25;
     --color: #fff;
-    --dashboard-background-color: var(--gray-darkest);
-    --tile-background-color: var(--gray-darker);
+    --dashboard-background-color: #ecf0f5;
+    --tile-background-color: #3c8dbc;
 }

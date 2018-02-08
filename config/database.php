@@ -1,5 +1,6 @@
 <?php
-
+$readHosts = [];
+$readHosts[] = isset($_SERVER['DB_HOST']) ? $_SERVER['DB_HOST'] : env('DB_HOST');
 return [
 
     /*
@@ -26,7 +27,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'sqlite'),
+    'default' => env('DB_CONNECTION', 'auto_master'),
 
     /*
     |--------------------------------------------------------------------------
@@ -46,37 +47,36 @@ return [
 
     'connections' => [
 
-        'sqlite' => [
-            'driver' => 'sqlite',
-            'database' => env('DB_DATABASE', database_path('database.sqlite')),
-            'prefix' => '',
-        ],
-
-        'mysql' => [
+        'auto_master' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => 'utf8',
-            'collation' => 'utf8_unicode_ci',
-            'prefix' => '',
-            'strict' => true,
-            'engine' => null,
+            'read'   => [
+                'host' => $readHosts[array_rand($readHosts)],
+            ],
+            'write' => [
+                'host' => isset($_SERVER['DB_HOST']) ? $_SERVER['DB_HOST'] : env('DB_HOST'),
+            ],
+            'database'  => isset($_SERVER['DB_DATABASE']) ? $_SERVER['DB_DATABASE'] : env('DB_DATABASE', 'auto_master'),
+            'username'  => isset($_SERVER['DB_USERNAME']) ? $_SERVER['DB_USERNAME'] : env('DB_USERNAME'),
+            'password'  => isset($_SERVER['DB_PASSWORD']) ? $_SERVER['DB_PASSWORD'] : env('DB_PASSWORD'),
+            'charset'   => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix'    => '',
+            'strict'    => false,
         ],
-
-        'pgsql' => [
-            'driver' => 'pgsql',
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => 'utf8',
-            'prefix' => '',
-            'schema' => 'public',
-            'sslmode' => 'prefer',
+        'cce' => [
+            'driver' => 'mysql',
+            'read'   => [
+                'host' => $readHosts[array_rand($readHosts)],
+            ],
+            'write' => [
+                'host' => isset($_SERVER['DB_HOST']) ? $_SERVER['DB_HOST'] : env('DB_HOST'),
+            ],
+            'database'  => env('DB_DATABASE_CCE', 'carcountexperts'),
+            'username'  => isset($_SERVER['DB_USERNAME']) ? $_SERVER['DB_USERNAME'] : env('DB_USERNAME'),
+            'password'  => isset($_SERVER['DB_PASSWORD']) ? $_SERVER['DB_PASSWORD'] : env('DB_PASSWORD'),
+            'charset'   => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix'    => '',
         ],
 
     ],

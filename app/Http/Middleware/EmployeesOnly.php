@@ -5,15 +5,13 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class Authenticate
+class EmployeesOnly
 {
     /**
      * Handle an incoming request.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
-     * @param string|null              $guard
-     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
      * @return mixed
      */
     public function handle($request, Closure $next, $guard = null)
@@ -26,8 +24,12 @@ class Authenticate
             }
         }
 
-        dd($request);
+        $user = Auth::user();
 
+        if(empty($user->team_id) || !empty($user->termination_date)){
+            abort(404);
+        }
+        
         return $next($request);
     }
 }

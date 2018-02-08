@@ -11,7 +11,6 @@
 .time-weather__time {
     display: block;
     padding: 0.1em 0;
-    color: var(--yellow);
     letter-spacing: 0.05em;
     font-weight: var(--font-weight-light);
     font-size: var(--font-size-l);
@@ -24,7 +23,6 @@
     left: 0;
     display: none;
     width: 100%;
-    color: var(--yellow);
     text-align: center;
     text-transform: uppercase;
     font-size: var(--font-size-xs);

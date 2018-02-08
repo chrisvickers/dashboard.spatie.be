@@ -4,23 +4,32 @@
 
 @javascript(compact('pusherKey', 'pusherCluster', 'usingNodeServer'))
 
-<dashboard id="dashboard" columns="6" rows="3">
-    <twitter :initial-tweets="{{ json_encode($initialTweets) }}" position="a1:a3"></twitter>
-    <uptime position="a1:a3"></uptime>
-    <packagist position="b1"></packagist>
-    <npm position="b2"></npm>
-    <github position="b3"></github>
-    <music position="c1:d1"></music>
-    <tasks team-member="alex" position="c2"></tasks>
-    <tasks team-member="brent" position="d2"></tasks>
-    <tasks team-member="freek" position="e2"></tasks>
-    <tasks team-member="harish" position="c3"></tasks>
-    <tasks team-member="seb" position="d3"></tasks>
-    <tasks team-member="willem" position="e3"></tasks>
-    <time-weather position="e1" date-format="ddd DD/MM" time-zone="Asia/Kolkata" weather-city="Mira-Bhayandar"></time-weather>
-    <time-weather position="f1" date-format="ddd DD/MM" time-zone="Europe/Brussels" weather-city="Antwerp"></time-weather>
-    <calendar position="f2:f3"></calendar>
-    <internet-connection></internet-connection>
+<?php $columns = 8; $rows = 6;?>
+
+<dashboard id="dashboard" columns="{{ $columns }}" rows="{{ $rows }}">
+    <?php $count = 1; $rows = ['a','b','c','d','e','f','g','h']; $row_index = 0;?>
+    @foreach($bdrs as $bdr)
+        <employee employee="{{ $bdr->name }}" email="{{ $bdr->email }}" position="{{ $rows[$row_index] . $count }}:{{ $rows[$row_index+1] . $count }}"></employee>
+            <?php $row_index += 2;?>
+            @if($row_index >= $columns)
+                <?php $row_index = 0; $count++?>
+            @endif
+    @endforeach
+
+    {{--<twitter :initial-tweets="{{ json_encode($initialTweets) }}" position="a1:a3"></twitter>--}}
+    {{--<uptime position="a1:a3"></uptime>--}}
+    {{--<packagist position="b1"></packagist>--}}
+    {{--<npm position="b2"></npm>--}}
+    {{--<github position="b3"></github>--}}
+    {{--<music position="c1:d1"></music>--}}
+    {{--<time-weather position="e1:f1" date-format="ddd DD/MM" time-zone="America/New_York" weather-city="Tampa Bay"></time-weather>--}}
+    <?php $count = $count += 2;  $row_index = 0;?>
+    @foreach($closers as $closer)
+            <employee employee="{{ $closer->name }}" email="{{ $closer->email }}" position="{{ $rows[$row_index] . $count }}:{{ $rows[$row_index+1] . $count }}"></employee>
+            <?php $row_index += 2;?>
+    @endforeach
+    {{--<calendar position="f2:f3"></calendar>--}}
+    {{--<internet-connection></internet-connection>--}}
 </dashboard>
 
 @endsection
