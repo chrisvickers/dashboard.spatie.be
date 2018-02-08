@@ -20,12 +20,12 @@ class UsersController extends Controller
         $status->email = $user->email;
         $status->id = $user->id;
         $status->name = $user->name;
-        $status->status = 'Offline';
+        $status->status = 'offline';
         $status->status_bool = false;
 
         $last_call = Carbon::parse($user->phone_client_last_call,config('app.timezone'));
         if($last_call->diffInMinutes(Carbon::now()) < 2){
-            $status->status = 'Online';
+            $status->status = 'online';
             $status->status_bool = true;
         }
 

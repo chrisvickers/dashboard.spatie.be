@@ -1,7 +1,7 @@
 .employee{
 }
 
-.tile .offline{
+.tile.offline{
     background: var(--blue);
 
 }

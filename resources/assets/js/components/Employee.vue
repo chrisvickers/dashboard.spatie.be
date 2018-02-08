@@ -20,12 +20,13 @@ export default{
 
     mixins : [echo],
 
-    props : ['employee','position','email','user'],
+    props : ['employee','position','email'],
 
     data(){
         return {
             user : {
-                classed : 'online'
+                classed : 'online',
+                status_bool : true
             }
         }
     },
@@ -38,7 +39,7 @@ export default{
                 this.user = response.data;
                 this.getStatusClass(this.user);
             },(response) => {
-                this.user = {}
+                this.user = {class : 'offline', status_bool : true}
             })
 
         },
@@ -52,6 +53,7 @@ export default{
 
 
     mounted() {
+        this.getStatus(this.email);
     }
 
 
